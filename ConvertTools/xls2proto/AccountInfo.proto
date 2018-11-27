@@ -6,7 +6,7 @@
 
 syntax="proto3";
 
-package JX;
+package X.Res;
 
 message AccountInfo{
     /** 姓名 */

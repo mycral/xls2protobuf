@@ -42,6 +42,7 @@ set SRC_OUT=.\
 
 ::for cpp
 set STEP2_PROTO2CPP_PATH=.\proto2cpp
+set STEP2_PROTO2PY_PATH=.\proto2py
 
 cd %STEP2_PROTO2CS_PATH%
 
@@ -62,11 +63,13 @@ for /f "delims=." %%i in (protolist.txt) do protoc --proto_path=..\%STEP1_XLS2PR
 
 ::for cpp
 for /f "delims=." %%i in (protolist.txt) do protoc --proto_path=..\%STEP1_XLS2PROTO_PATH% ..\%STEP1_XLS2PROTO_PATH%\%%i.proto --cpp_out=%SRC_OUT%
-
+::for python
+for /f "delims=." %%i in (protolist.txt) do protoc --proto_path=..\%STEP1_XLS2PROTO_PATH% ..\%STEP1_XLS2PROTO_PATH%\%%i.proto --python_out=%SRC_OUT%
 cd ..
 
 move /y %STEP2_PROTO2CS_PATH%\*pb.cc %STEP2_PROTO2CPP_PATH%
 move /y %STEP2_PROTO2CS_PATH%\*pb.h %STEP2_PROTO2CPP_PATH%
+move /y %STEP2_PROTO2CS_PATH%\*pb.py %STEP2_PROTO2PY_PATH%
 
 ::---------------------------------------------------
 ::第三步：将bin和cs拷到Assets里
